@@ -1,8 +1,10 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
+from ..request import get_quotes
 
 
 
 @main.route('/')
 def index():
-    return '<h1> its working</h1>'
+    Quote = get_quotes()
+    return render_template('cover.html', Quote=Quote)
