@@ -7,8 +7,9 @@
       <div class="collapse navbar-collapse d-flex justify-content-around w-50" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="{{ url_for('main.add_blog')}}">NewBlog</a>
+          <a class="nav-link" href="{{ url_for('auth.register')}}">Register</a>
+          <a class="nav-link" href="{{ url_for('auth.login')}}">Login</a>
         </div>
       </div>
     </div>

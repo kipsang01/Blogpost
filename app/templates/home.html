@@ -2,6 +2,18 @@
 {% block body %}
 
    <div class="container">
-      <blockquote>{{ Quote.author}} {{ Quote.quote}} {{ Quote.link}}</blockquote>
+     <form method="POST" action="" >
+      {{ form.csrf_token }}
+      <div class=" shadow-sm p-3 mb-2 bg-body rounded">
+          {{ form.title.label (class='form-label') }} {{ form.title (class='form-control')}} 
+      </div>
+      <div class=" shadow-sm p-3 mb-2 bg-body rounded">
+          {{ form.category.label (class='form-label') }} {{ form.category (class='form-control')}}
+      </div>
+      <div class=" shadow-sm p-3 mb-2 bg-body rounded">
+          {{ form.editor.label (class='form-label') }} {{ form.editor}}
+      </div>
+      {{form.submit (class='btn btn-success')}}
+    </form>
    </div>
 {% endblock %}
