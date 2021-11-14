@@ -5,6 +5,7 @@
         <h2> {{ blog.title}} </h2>
         {% if blog.author.id == current_user.id %}
         <span><a href="{{ url_for('main.delete_blog',blog_id = blog.id)}}"><i class="fas fa-trash"></i></a></span>
+        <span><a href="{{ url_for('main.update_blog',blog_id = blog.id)}}"><i class="far fa-edit"></i></a></span>
          {% endif %}
         <small class="text-muted"> Author:{{blog.author.username}} Posted: {{ blog.date_posted }}</small>
         <p>{{ blog.content }}</p>

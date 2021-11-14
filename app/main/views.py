@@ -69,5 +69,23 @@ def delete_comment(comment_id):
     return redirect(url_for('.blog',blog_id = blog_id))
 
 
-
+@main.route('/blog/<blog_id>/update',methods=['GET', 'POST'])
+@login_required
+def update_blog(blog_id):
+    blog=Blog.query.filter_by(id=blog_id).first()
+    form=PostForm()
+    if blog.author.id !=current_user.id:
+        abort(403)
+   
+    if form.validate_on_submit():
+        blog_update = Blog( title=form.title.data, category=form.category.data, content=form.editor.data, user_id = current_user.id)
+        blog_update.save_blog()
+        flash('Blog updated!','success')
+        return redirect(url_for('.blog',blog_id = blog_update.id))
+    elif request.method=='GET':
+        form.title.data=blog.title
+        form.category.data=blog.category
+        form.editor.data = blog.content
+        
+    return render_template('add-blog.html', form = form)
 
