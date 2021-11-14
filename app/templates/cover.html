@@ -1,11 +1,7 @@
 
-{% extends 'base.html'%}
-{% block body %}
-
-<div class="container d-flex justify-content-end align-content-center align-items-center vh-100 ">
-    <div class="quote w-50">
+<div class="container-fluid d-flex justify-content-end align-content-center align-items-center vh-100 quote ">
+    <div class="">
         <h2 class = "text-light">{{ Quote.quote}}</h2>
         <small class=" text-light"> {{ Quote.author}} </small>
     </div>
  </div>
- {% endblock%}

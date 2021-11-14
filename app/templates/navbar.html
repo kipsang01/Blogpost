@@ -6,10 +6,19 @@
       </button>
       <div class="collapse navbar-collapse d-flex justify-content-around w-50" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
+          <a class="nav-link" aria-current="page" href="{{ url_for('main.home')}}">Home</a>
           <a class="nav-link" href="{{ url_for('main.add_blog')}}">NewBlog</a>
           <a class="nav-link" href="{{ url_for('auth.register')}}">Register</a>
-          <a class="nav-link" href="{{ url_for('auth.login')}}">Login</a>
+
+          <form class="d-flex">
+            {% if current_user.is_authenticated %}
+                    <span class = "nav-link text-success"> <a href="{{ url_for('main.profile')}}"> <i class="fas fa-user-circle"></i> {{current_user.username}} </a></span>
+                    <span><a class="nav-link text-danger" href="{{url_for('auth.logout')}}">Sign out</a></span>
+                    {% else %}
+                    <span ><a class="nav-link" href="{{url_for('auth.register')}}">Register</a></span>
+                    <span><a class="nav-link text-success" href="{{url_for('auth.login')}}">Sign in</a></span>
+           {%endif%}
+          </form>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ def create_app(config_name):
     
     #initializing flask extensions
     db.init_app(app)
-    db.migrate = Migrate(app,db)
+    migrate=Migrate(app,db)
     login_manager.init_app(app)
     mde.init_app(app)
     

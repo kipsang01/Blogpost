@@ -1,19 +1,29 @@
 {% extends 'base.html'%}
 {% block body %}
-
-   <div class="container">
-     <form method="POST" action="" >
-      {{ form.csrf_token }}
-      <div class=" shadow-sm p-3 mb-2 bg-body rounded">
-          {{ form.title.label (class='form-label') }} {{ form.title (class='form-control')}} 
-      </div>
-      <div class=" shadow-sm p-3 mb-2 bg-body rounded">
-          {{ form.category.label (class='form-label') }} {{ form.category (class='form-control')}}
-      </div>
-      <div class=" shadow-sm p-3 mb-2 bg-body rounded">
-          {{ form.editor.label (class='form-label') }} {{ form.editor}}
-      </div>
-      {{form.submit (class='btn btn-success')}}
-    </form>
-   </div>
-{% endblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7">
+            <h1>home</h1>
+            {%if blogs%}
+                {% for blog in blogs%}
+                <div class="card">
+                <h4> <a href=" {{ url_for('main.blog', blog_id = blog.id) }}"> {{ blog.title}} </a></h4>
+                <p> {{blog.content}}</p>
+                <div class="card-footer">
+                   <span>By: {{ blog.author.username }}</span> Posted on <span>{{ blog.date_posted }}</span>
+                </div>
+                
+                </div>
+                
+                {% endfor%}
+            {% else %}
+    <p>There are no blogs</p>
+    {%endif%}
+        </div>
+        <div class="col-md-5">
+         {% include 'cover.html' %}   
+        </div>
+    </div>
+    
+</div>
+{% endblock%}
