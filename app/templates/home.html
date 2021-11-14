@@ -1,24 +1,24 @@
 {% extends 'base.html'%}
 {% block body %}
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-7">
-            <h1>home</h1>
+        <div class="col-md-7 blogs">
+            <h3>Home</h3>
             {%if blogs%}
                 {% for blog in blogs%}
-                <div class="card">
-                <h4> <a href=" {{ url_for('main.blog', blog_id = blog.id) }}"> {{ blog.title}} </a></h4>
-                <p> {{blog.content}}</p>
-                <div class="card-footer">
-                   <span>By: {{ blog.author.username }}</span> Posted on <span>{{ blog.date_posted }}</span>
-                </div>
-                
-                </div>
+                    <div class="card p-2 ">
+                        <h4> <a  href=" {{ url_for('main.blog', blog_id = blog.id) }}"> {{ blog.title}} </a></h4>
+                        <span class="text-muted">Author: <i> {{ blog.author.username }}</i> Posted on: <i>{{ blog.date_posted.strftime('%d-%m-%Y') }}</i></span>
+                        <hr class="w-50">
+                        <div class = "p-2 ">
+                            <p>{{blog.content}}</p>
+                        </div>
+                    </div>
                 
                 {% endfor%}
             {% else %}
-    <p>There are no blogs</p>
-    {%endif%}
+            <p>There are no blogs</p>
+            {%endif%}
         </div>
         <div class="col-md-5">
          {% include 'cover.html' %}   

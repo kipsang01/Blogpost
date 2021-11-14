@@ -78,10 +78,12 @@ def update_blog(blog_id):
         abort(403)
    
     if form.validate_on_submit():
-        blog_update = Blog( title=form.title.data, category=form.category.data, content=form.editor.data, user_id = current_user.id)
-        blog_update.save_blog()
+        blog.title=form.title.data
+        blog.category=form.category.data
+        blog.content=form.editor.data
+        db.session.commit()
         flash('Blog updated!','success')
-        return redirect(url_for('.blog',blog_id = blog_update.id))
+        return redirect(url_for('.blog',blog_id = blog.id))
     elif request.method=='GET':
         form.title.data=blog.title
         form.category.data=blog.category

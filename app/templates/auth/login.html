@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% block body%}
 <div class="form w-50 m-auto shadow p-3 mt-5 bg-body rounded">
-    <div class="header text-success text-center">
+    <div class="header text-primary text-center">
         <h1>LOGIN</h1>
     </div>
     <form method="POST" action="" >
@@ -15,7 +15,7 @@
         <div class=" shadow-sm p-3 mb-2 bg-body rounded">
             {{ form.remember.label (class='form-label') }} {{ form.remember (class='form-control')}}
         </div>
-        {{form.submit (class='btn btn-success')}}
+        {{form.submit (class='btn btn-primary w-100')}}
         <p class="m-2"> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
     </form>
 </div>

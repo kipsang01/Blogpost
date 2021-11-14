@@ -1,5 +1,36 @@
 .quote{
-    background-image: url("images/bg.jpg");
+    background-image: url("images/bg.jpeg");
     background-repeat: no-repeat;
     background-size:cover;
 }
+a{
+    text-decoration: none
+}
+.blogs a{
+    text-decoration:none;
+    font-family: 'Stylish', sans-serif;
+    color: #0b2540
+}
+.blogs a:hover{
+    text-decoration:underline;
+    font-size: 120%;
+}
+.blogs p{
+    font-family: 'Poppins', sans-serif;
+}
+header{
+    background-color: #ccc;
+    margin:auto;
+    padding:auto;
+}
+body{
+    background-color: #ccc;
+}
+.fas ,.far{
+    font-size: 32px;
+}
+
+/* font-family: 'Great Vibes', cursive;
+font-family: 'IM Fell Great Primer SC', serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Stylish', sans-serif; */

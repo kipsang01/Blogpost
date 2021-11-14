@@ -1,7 +1,13 @@
 
-<div class="container-fluid d-flex justify-content-end align-content-center align-items-center vh-100 quote ">
-    <div class="">
-        <h2 class = "text-light">{{ Quote.quote}}</h2>
-        <small class=" text-light"> {{ Quote.author}} </small>
+<div class=" d-flex justify-content-end align-content-center align-items-center vh-100 quote position-fixed m-1 mt-3">
+    <div>
+        <figure class="text-center text-light">
+            <blockquote class="blockquote">
+              <p> {{ Quote.quote}} </p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              By <cite title="Source Title">{{ Quote.author}}</cite>
+            </figcaption>
+          </figure>
     </div>
  </div>

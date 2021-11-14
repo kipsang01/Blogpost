@@ -5,7 +5,7 @@ from wtforms.validators import InputRequired
 
 
 class PostForm(FlaskForm):
-    title =  StringField('Enter title:',validators = [InputRequired()])
+    title =  StringField('Title:',validators = [InputRequired()])
     category = RadioField('Category:', choices=[('politics','Politics'),('technology','Technology'),('business','Business'),('fashion','Fashion')])
     editor = MdeField('Content:')
     submit = SubmitField('Submit')

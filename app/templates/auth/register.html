@@ -1,9 +1,9 @@
 {% extends 'base.html'%}
 {% block body%}
 
-<div class="form w-50 m-auto shadow p-3 mt-3 bg-body rounded">
-    <div class="header text-success text-center">
-        <h1>CREATE AN ACCOUNT</h1>
+<div class="reg-form w-50 m-auto shadow p-3 mt-3 bg-body rounded bg-muted">
+    <div class="header text-primary text-center">
+        <h3>CREATE AN ACCOUNT</h3>
     </div>
     <form method="POST" action="" >
         {{ form.csrf_token }}
@@ -19,7 +19,7 @@
         <div class=" shadow-sm p-1 mb-2 bg-body rounded">
             {{ form.password2.label (class='form-label') }} {{ form.password2 (class='form-control')}}
         </div>
-        {{form.submit (class='btn btn-success')}}
+        {{form.submit (class='btn btn-primary w-100')}}
     </form>
 
 </div>
