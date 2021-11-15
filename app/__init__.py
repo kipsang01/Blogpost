@@ -9,6 +9,8 @@ from flask_uploads import UploadSet,configure_uploads,IMAGES
 #initialize sql db
 db = SQLAlchemy()
 
+migrate = Migrate()
+
 mde = Mde()
 #manage login sessions
 login_manager = LoginManager()
@@ -27,7 +29,7 @@ def create_app(config_name):
     
     #initializing flask extensions
     db.init_app(app)
-    migrate=Migrate(app,db)
+    migrate.init_app(app, db)
     login_manager.init_app(app)
     mde.init_app(app)
     configure_uploads(app,photos)
