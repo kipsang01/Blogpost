@@ -38,11 +38,11 @@
                 <ul class="list-group">
                     {% for blog in user.blogs%}
                     <li class="list-group-item d-flex flex-row justify-content-around">
-                        <div class="details blogs ">
+                        <div class="details blogs w-75 ">
                            <a href="{{ url_for('main.blog', blog_id = blog.id)}}"> {{ blog.title}} </a><br>
                             <small class ="text-muted">{{ blog.comments | length}}  comments</small>
                         </div>
-                        <div>
+                        <div class="w-25">
                             {% if blog.user_id == current_user.id%}
                             <a href="{{ url_for('main.delete_blog', blog_id = blog.id)}}"><i class="fas fa-trash text-danger m-1"></i></a>
                             {%endif%}
