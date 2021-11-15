@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import  LoginManager
 from  flask_migrate import Migrate
 from flask_mde import Mde
+from flask_uploads import UploadSet,configure_uploads,IMAGES
 
 #initialize sql db
 db = SQLAlchemy()
@@ -13,6 +14,9 @@ mde = Mde()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
+
+photos = UploadSet('photos',IMAGES)
+
 
 
 def create_app(config_name):
@@ -26,6 +30,8 @@ def create_app(config_name):
     migrate=Migrate(app,db)
     login_manager.init_app(app)
     mde.init_app(app)
+    configure_uploads(app,photos)
+     
     
     # Registering the blueprint
     from .main import main as main_blueprint

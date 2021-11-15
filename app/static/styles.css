@@ -29,6 +29,10 @@ body{
 .fas ,.far{
     font-size: 32px;
 }
+.profile-info img{
+    width:50%;
+    height:50%;
+}
 
 /* font-family: 'Great Vibes', cursive;
 font-family: 'IM Fell Great Primer SC', serif;

@@ -1,6 +1,7 @@
 class Config():
     SECRET_KEY = 'hfjdisoolfjd=-20394opz;'
     QUOTE_API = 'http://quotes.stormconsultancy.co.uk/random.json'
+    UPLOADED_PHOTOS_DEST ='app/static/images'
 
     @staticmethod
     def init_app(app):

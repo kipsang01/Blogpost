@@ -8,7 +8,7 @@
                 {% for blog in blogs%}
                     <div class="card p-2 ">
                         <h4> <a  href=" {{ url_for('main.blog', blog_id = blog.id) }}"> {{ blog.title}} </a></h4>
-                        <span class="text-muted">Author: <i> {{ blog.author.username }}</i> Posted on: <i>{{ blog.date_posted.strftime('%d-%m-%Y') }}</i></span>
+                        <span class="text-muted">Author: <a href="{{ url_for('main.profile',username = blog.author.username)}}"><i> {{ blog.author.username }}</i> </a> Posted on: <i>{{ blog.date_posted.strftime('%d-%m-%Y') }}</i></span>
                         <hr class="w-50">
                         <div class = "p-2 ">
                             <p>{{blog.content}}</p>

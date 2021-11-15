@@ -1,11 +1,11 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from flask_login import login_required,current_user
 from . import main
-from .. import db
+from .. import db,photos
 from sqlalchemy import  func, desc
 from ..models import User,Blog,Comment 
 from ..request import get_quotes
-from .forms import PostForm,CommentForm
+from .forms import PostForm,CommentForm,AddBioForm
 
 
 
@@ -31,11 +31,13 @@ def add_blog():
     return render_template('add-blog.html' , form=form)
 
 
-@main.route('/profile')
-@login_required
-def profile():
-    pass
+#profile
+@main.route('/profile<username>')
+def profile(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template('profile.html',user=user)
 
+#blog page
 @main.route('/blog/<blog_id>', methods=['GET', 'POST'])
 def blog(blog_id):
     form = CommentForm()
@@ -50,7 +52,7 @@ def blog(blog_id):
             return redirect(url_for('.blog',blog_id = blog.id))
     return render_template('blog.html', blog=blog,comments=comments,form=form)
 
-
+#delete blog
 @main.route('/comment/<blog_id>', methods=['POST','GET'])
 def delete_blog(blog_id):
     blog_del = Blog.query.filter_by(id = blog_id).first()
@@ -59,7 +61,7 @@ def delete_blog(blog_id):
     return redirect(url_for('.home'))
 
 
-
+#delete comment
 @main.route('/comment/<comment_id>', methods=['POST','GET'])
 def delete_comment(comment_id):
     comment_del = Comment.query.filter_by(id = comment_id).first()
@@ -68,7 +70,7 @@ def delete_comment(comment_id):
     db.session.commit()
     return redirect(url_for('.blog',blog_id = blog_id))
 
-
+#edit blog
 @main.route('/blog/<blog_id>/update',methods=['GET', 'POST'])
 @login_required
 def update_blog(blog_id):
@@ -91,3 +93,33 @@ def update_blog(blog_id):
         
     return render_template('add-blog.html', form = form)
 
+#adding bio
+@main.route('/user/<uname>/update/bio',methods= ['GET','POST'])
+@login_required
+def add_bio(uname):
+    form = AddBioForm()
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',username=user.username))
+    return render_template('bio-profile.html',form=form)
+
+
+#Adding profile pic
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'images/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',username=uname))
