@@ -13,6 +13,7 @@ def register():
     if form.validate_on_submit():
         new_user = User(email = form.email.data, username = form.username.data,password = form.password.data)
         new_user.save_user()
+        flash('Registered, you can now login', 'success')
         return redirect(url_for('auth.login'))
     title = "New Account"
     return render_template('auth/register.html',form = form,title=title)
@@ -27,7 +28,7 @@ def login():
             login_user(user,login_form.remember.data)
             return redirect(request.args.get('next') or url_for('main.home'))
 
-        flash('Invalid username or Password')
+        flash('Invalid username or Password','danger')
 
     title = "watchlist login"
     return render_template('auth/login.html',form = login_form,title=title)
@@ -37,6 +38,6 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been successfully logged out')
+    flash('You have been successfully logged out','success')
     return redirect(url_for("main.home"))
 

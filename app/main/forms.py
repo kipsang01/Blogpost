@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_mde import Mde, MdeField
 from wtforms import SubmitField,StringField,RadioField,TextAreaField
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, Email
 
 
 class PostForm(FlaskForm):
@@ -18,3 +18,6 @@ class AddBioForm(FlaskForm):
     bio = TextAreaField('Bio:',validators=[InputRequired()])
     submit = SubmitField('Post')
     
+class subscriptionForm(FlaskForm):
+     email = StringField('Your Email Address',validators=[InputRequired(),Email()])
+     submit = SubmitField('Submit')

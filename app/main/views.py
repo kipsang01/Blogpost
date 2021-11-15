@@ -5,16 +5,17 @@ from .. import db,photos
 from sqlalchemy import  func, desc
 from ..models import User,Blog,Comment 
 from ..request import get_quotes
-from .forms import PostForm,CommentForm,AddBioForm
+from .forms import PostForm,CommentForm,AddBioForm, subscriptionForm
 
 
 
 @main.route('/')
 @main.route('/home')
 def home():
+    form = subscriptionForm()
     Quote = get_quotes()
     blogs = Blog.query.order_by(desc('date_posted')).all()
-    return render_template('home.html', blogs=blogs,  Quote=Quote)
+    return render_template('home.html', blogs=blogs,  Quote=Quote,form = form)
 
 @main.route('/addblog', methods=['GET', 'POST'])
 @login_required
@@ -58,6 +59,7 @@ def delete_blog(blog_id):
     blog_del = Blog.query.filter_by(id = blog_id).first()
     db.session.delete(blog_del)
     db.session.commit()
+    flash('Blog deleted!', 'danger')
     return redirect(url_for('.home'))
 
 
@@ -68,6 +70,7 @@ def delete_comment(comment_id):
     blog_id = comment_del.blog_id
     db.session.delete(comment_del)
     db.session.commit()
+    flash('Comment deleted!', 'danger')
     return redirect(url_for('.blog',blog_id = blog_id))
 
 #edit blog
