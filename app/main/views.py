@@ -126,3 +126,11 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',username=uname))
+
+#return blogs by category
+@main.route('/blogs/<category>')
+def blog_category(category):
+    form = subscriptionForm()
+    Quote = get_quotes()
+    blogs = Blog.query.filter_by(category=category).all()
+    return render_template('category.html',blogs=blogs,form=form,category=category, Quote =Quote)

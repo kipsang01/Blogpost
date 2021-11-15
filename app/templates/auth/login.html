@@ -13,7 +13,7 @@
             {{ form.password.label (class='form-label') }} {{ form.password (class='form-control')}}
         </div>
         <div class=" shadow-sm p-3 mb-2 bg-body rounded">
-            {{ form.remember.label (class='form-label') }} {{ form.remember (class='form-control')}}
+            {{ form.remember.label (class='form-label') }} {{ form.remember (class="form-check-input")}}
         </div>
         {{form.submit (class='btn btn-primary w-100')}}
         <p class="m-2"> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>

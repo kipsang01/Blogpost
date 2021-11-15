@@ -1,9 +1,17 @@
 {% extends 'base.html'%}
 {% block body %}
 <div class="container">
-    <div class="row">
+    <div class="row vh-100">
         <div class="col-md-7 blogs">
             <h3>Home</h3>
+            <div class=" d-flex flex-row justify-content-around bd-highlight mb-3 ">
+                <div class="category-link"><a href="{{ url_for('main.home')}}">All</a></div> <br>
+                <div class="category-link"><a href="{{ url_for('main.blog_category',category = 'politics')}}">Politics</a></div> <br>
+                <div class="category-link"><a href="{{ url_for('main.blog_category',category = 'technology')}}">Technology</a></div> <br>
+                <div class="category-link"><a href="{{ url_for('main.blog_category',category = 'business')}}">Business</a></div> <br>
+                <div class="category-link"><a href="{{ url_for('main.blog_category',category = 'fashion')}}">Fashion</a></div>
+            </div>
+            {% block blogs%}
             {%if blogs%}
                 {% for blog in blogs%}
                     <div class="card p-2 ">
@@ -12,7 +20,7 @@
                         <hr class="w-50">
                         <div class = "p-2 ">
                             {% if (blog.content | length)>300 %}
-                            {{blog.content[:300]}}... <a class="text-primary" href="{{ url_for('main.blog', blog_id = blog.id)}}">read more</a>
+                            {{blog.content[:300] | safe}}... <a class="text-primary" href="{{ url_for('main.blog', blog_id = blog.id)}}">read more</a>
                             {% else%}
                             <p>{{blog.content}}</p>
                             {%endif %}
@@ -23,6 +31,7 @@
             {% else %}
             <p>There are no blogs</p>
             {%endif%}
+            {%endblock%}
         </div>
         <div class="col-md-5">
          {% include 'cover.html' %}   

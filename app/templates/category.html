@@ -1,0 +1,23 @@
+{% extends 'home.html'%}
+{%block blogs %}
+    <h4 class="sticky">{{category | capitalize}}</h4>
+        {%if blogs%}
+                {% for blog in blogs%}
+                    <div class="card p-2 ">
+                        <h4> <a  href=" {{ url_for('main.blog', blog_id = blog.id) }}"> {{ blog.title}} </a></h4>
+                        <span class="text-muted">Author: <a href="{{ url_for('main.profile',username = blog.author.username)}}"><i> {{ blog.author.username }}</i> </a> Posted on: <i>{{ blog.date_posted.strftime('%d-%m-%Y') }}</i></span>
+                        <hr class="w-50">
+                        <div class = "p-2 ">
+                            {% if (blog.content | length)>300 %}
+                            {{blog.content[:300] | safe}}... <a class="text-primary" href="{{ url_for('main.blog', blog_id = blog.id)}}">read more</a>
+                            {% else%}
+                            <p>{{blog.content| safe}}</p>
+                            {%endif %}
+                        </div>
+                    </div>
+                
+                {% endfor%}
+        {% else %}
+            <p>There are no blogs</p>
+        {%endif%}
+{% endblock %}
